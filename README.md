@@ -1,6 +1,6 @@
 ### Queue system test
 
-Playing with queues. Simulates a queue of PDF and HTML files that should be processed. HTML files has priority and take less time than the PDF ones.
+Playing with queues. Simulates a queue of PDF and HTML files that should be processed. HTML files has priority and take less time than the PDF ones. The queue runs 3 items at the same time.
 
 * HTML files takes 10 seconds to process.
 * PDF files takes 100 seconds to process.
