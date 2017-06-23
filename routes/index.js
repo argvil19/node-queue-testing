@@ -52,7 +52,7 @@ module.exports = function(app, io) {
           results[index].status = 1;
           cb();
           app.io.emit('item_finished', results[index]);
-        }, 10000);
+        }, 100000);
       });
     }
 
