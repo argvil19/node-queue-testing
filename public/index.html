@@ -1,0 +1,43 @@
+
+<!doctype html>
+<html>
+  <head>
+    <title>Test</title>
+  </head>
+  <body>
+    <ul id='verga'></ul>
+    <button id='add-html'>Add HTML</button>
+    <button id='add-pdf'>Add PDF</button>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js'></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script>
+        var socket = io();
+        
+        socket.on('get_queue', function(arr) {
+            arr.forEach(function (i) {
+                $('#verga').append($('<li/>').html(i.name + ' - Status: ' + (i.status ? 'Finished' : 'In progress')).attr('val-id', i.id));
+            });
+        });
+        
+        socket.on('new_item', function(item) {
+            $('#verga').append($('<li/>').html(item.name + ' - Status: ' + (item.status ? 'Finished' : 'In progress')).attr('val-id', item.id));
+        });
+        
+        socket.on('item_finished', function(item) {
+            $('#verga li[val-id="' + item.id + '"]').html(item.name + ' - Status: ' + (item.status ? 'Finished' : 'In progress'));
+        });
+        
+        $('#add-html').on('click', function(e) {
+            e.preventDefault();
+            
+            $.post('/html');
+        });
+        
+        $('#add-pdf').on('click', function(e) {
+            e.preventDefault();
+            
+            $.post('/pdf');
+        });
+    </script>
+  </body>
+</html>
